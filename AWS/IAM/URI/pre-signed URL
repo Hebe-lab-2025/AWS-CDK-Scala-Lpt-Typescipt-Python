@@ -1,0 +1,60 @@
+下面这题要做的是：给 S3 里的 index.html 生成一个临时可访问的链接（pre-signed URL）。
+
+1) 生成 pre-signed URL（核心命令）
+
+把 BUCKET_NAME 换成你自己的 bucket 名：
+
+aws s3 presign s3://BUCKET_NAME/index.html --expires-in 3600
+
+
+--expires-in 3600 = 链接有效 1 小时（单位：秒）
+
+输出会是一条 https://... 的 URL
+
+2) 在浏览器打开
+
+把输出的那条 URL 复制到浏览器地址栏打开即可。
+
+3) 如果你想先确认文件在不在
+aws s3 ls s3://BUCKET_NAME/
+
+常见坑（你如果遇到就对照）
+
+报 AccessDenied：通常是 你当前 AWS 凭证没有 s3:GetObject 权限（或 bucket policy 禁止）。
+
+报 Unable to locate credentials / InvalidClientTokenId：说明 AWS CLI 还没配好有效 credentials（你前面已经遇到过这种）。
+
+你把你 bucket 名 + 你跑完 aws s3 presign ... 后的报错贴出来，我就能直接告诉你该怎么改。
+
+Task 8: Generate a URL for the S3 Object
+Use the presign command from aws s3 and pass the S3Uri of the file.
+
+这句话的意思很简单，这一题只要你做一条命令就完成了。
+
+你要做的事（一句话）
+
+👉 用 aws s3 presign，把 index.html 的 S3 路径（S3Uri）传进去，生成一个临时访问链接。
+
+正确命令（直接可用）
+
+假设你的 bucket 叫 hebe-educative-2025：
+
+aws s3 presign s3://hebe-educative-2025/index.html
+
+
+如果你想明确设置过期时间（可选）：
+
+aws s3 presign s3://hebe-educative-2025/index.html --expires-in 3600
+
+成功时你会看到什么
+
+终端会输出一条类似这样的链接：
+
+https://hebe-educative-2025.s3.us-east-2.amazonaws.com/index.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=...
+
+
+👉 把这条 URL 复制到浏览器打开即可
+
+重要理解（考试 / 面试一句话）
+
+A pre-signed URL allows temporary access to a private S3 object using the permissions of the AWS credentials that generated it.
