@@ -339,3 +339,164 @@ debugging auth errors
 1️⃣ 把 S3 + IAM 和你 Amazon 实习 合并成一条 Infra Story
 2️⃣ 给你一页 Cloudflare Networking + S3 对照表（DNS / CDN / Object Storage）
 3️⃣ 做一轮 Cloudflare 技术模拟 Q&A（10 题高频）
+
+————————
+
+AWS CLI：aws s3 命令中文整理（重点版）
+一、aws s3 是什么？
+
+### aws s3 是 AWS CLI 提供的一组高层（high-level）S3 操作命令，适合日常使用，比如上传、下载、同步文件。
+
+👉 如果你需要更底层、更精细的 API（比如逐个参数控制），用 aws s3api。
+
+二、路径参数类型（非常重要）
+1️⃣ LocalPath（本地路径）
+
+表示本地文件或目录
+
+可以是绝对路径或相对路径
+
+./index.html
+/home/user/data/
+
+### 2️⃣ S3Uri（S3 路径）
+
+表示 S3 bucket / 对象 / 前缀
+
+必须以 s3:// 开头
+
+# s3://my-bucket
+# s3://my-bucket/index.html
+# s3://my-bucket/folder/file.txt
+
+
+📌 S3 中的“文件夹”其实是 key 前缀（prefix），用 / 分隔。
+
+三、路径参数的顺序规则
+
+大多数命令最多有 两个路径参数：
+
+# aws s3 <command> <source> <destination>
+
+
+第一个：源（source）
+
+第二个：目标（destination）
+
+如果只有一个路径参数 → 表示只对源做操作（如 ls, mb）
+
+四、单文件 / 单对象操作
+
+以下命令在 不加 --recursive 时，只处理单个文件或对象：
+
+# cp（复制）
+
+# mv（移动）
+
+# rm（删除）
+
+📌 结尾有没有 / 很重要
+# aws s3 cp file.txt s3://bucket/
+# → 上传为 s3://bucket/file.txt
+
+# aws s3 cp file.txt s3://bucket/new.txt
+# → 上传为 s3://bucket/new.txt
+
+五、目录 / 前缀级操作
+
+下面这些命令始终按“目录 / 前缀”处理：
+
+命令	作用
+# ls	列出 bucket / 目录
+mb	创建 bucket
+rb	删除 bucket
+sync	同步目录
+
+是否在路径结尾加 / 不影响结果
+
+六、常用命令速查表（面试 + 实操）
+📁 Bucket 操作
+aws s3 ls                       # 列出所有 bucket
+aws s3 mb s3://my-bucket        # 创建 bucket
+aws s3 rb s3://my-bucket        # 删除空 bucket
+
+📄 文件操作
+aws s3 cp file.txt s3://bucket/
+aws s3 cp s3://bucket/file.txt .
+aws s3 mv file.txt s3://bucket/
+aws s3 rm s3://bucket/file.txt
+
+🔁 同步（最常用）
+aws s3 sync ./local-dir s3://bucket/dir
+aws s3 sync s3://bucket/dir ./local-dir
+
+七、Include / Exclude 过滤规则（高频考点）
+规则核心一句话：
+
+后写的规则优先级更高
+
+只上传 .jpg 文件：
+aws s3 cp ./data s3://bucket/ --recursive \
+  --exclude "*" \
+  --include "*.jpg"
+
+同时上传 .jpg 和 .txt
+--exclude "*" --include "*.jpg" --include "*.txt"
+
+⚠️ 常见坑
+
+❌ 只写 --include 是没用的
+✅ 必须先 --exclude "*"
+
+八、presign：生成临时访问 URL（你之前用过）
+aws s3 presign s3://bucket/index.html
+
+
+生成 预签名 URL
+
+默认有效期 1 小时
+
+不需要 bucket 公开
+
+常见错误：region 不一致
+
+九、常见错误总结（你踩过的）
+❌ InvalidBucketName
+
+bucket 名不能有大写字母
+
+不能太短
+
+不能和别人重复
+
+✅ 正确示例：
+
+hebe-educative-2025
+
+❌ InvalidLocationConstraint
+
+us-east-1 特殊
+
+CLI region 和 bucket region 不一致
+
+✅ 解决：
+
+aws configure
+# 确认 region = us-east-2
+
+
+或创建 bucket 时指定 region。
+
+❌ AuthorizationQueryParametersError
+
+presign 的 region 和 bucket region 不一致
+
+📌 你的错误信息就是这个典型例子。
+
+十、面试一句话总结（非常加分）
+
+“aws s3 是一组高层 CLI 命令，适合文件级和目录级操作；路径分为 LocalPath 和 S3Uri；sync 常用于大规模数据同步；过滤规则是 exclude 先、include 后；需要注意 region 一致性问题。”
+
+官方文档（建议收藏）
+
+👉 https://docs.aws.amazon.com/cli/latest/reference/s3/
