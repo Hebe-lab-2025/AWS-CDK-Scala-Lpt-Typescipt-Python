@@ -1,130 +1,428 @@
-Great—here are learning-only materials that **do not reference or use any protected assessments**. They are original practice questions and concept summaries.
+```
+好的 😊 下面给你：
+
+* ✅ 中文题目
+* ✅ 标准参考答案
+* ✅ 详细解析
+* 👉 全部为**原创练习题**、只用于概念学习
 
 ---
 
-# ✅ Part 1 — 20 Concept-Only Practice Questions (Multiple-choice & T/F)
-
-These check **understanding only**, not any course content.
+# 🧭 第一部分：20 道概念练习题（中文）
 
 ---
 
-### 1️⃣ Which AWS component creates an isolated private network?
+### 1️⃣ 下列哪一个用于在 AWS 中创建**私有网络**？
 
 A. IAM
 B. VPC
 C. S3
 D. CloudFront
 
+**答案：B**
+**解析：**VPC（Virtual Private Cloud）提供用户在 AWS 中的专属网络环境。
+
 ---
 
-### 2️⃣ What issues temporary credentials that automatically expire?
+### 2️⃣ 哪个服务可以签发**自动过期的临时凭证**？
+
+A. IAM User
+B. Access Key
+C. AWS STS
+D. Security Group
+
+**答案：C**
+**解析：**STS = Security Token Service，生成短期凭证。
+
+---
+
+### 3️⃣ 身份提供商（IdP）主要负责什么？
+
+A. 存储镜像
+B. 身份认证（登录验证）
+C. 网络流量分发
+D. 数据加密
+
+**答案：B**
+**解析：**IdP 核心功能是“你是谁”。
+
+---
+
+### 4️⃣ IAM Identity Center 的主要作用是：
+
+A. 管理账单
+B. 控制台外观
+C. 集中式访问和权限管理
+D. 对象存储
+
+**答案：C**
+**解析：**它是 AWS 的统一登录与权限中心（原 AWS SSO）。
+
+---
+
+### 5️⃣ 判断题
+
+AWS 负责数据中心物理安全。
+
+**答案：正确**
+**解析：**属于 **security of the cloud**。
+
+---
+
+### 6️⃣ 判断题
+
+安全组（Security Group）的配置属于客户责任。
+
+**答案：正确**
+**解析：**客户负责 **security in the cloud**。
+
+---
+
+### 7️⃣ 以下哪一个是常见的 IdP？
+
+A. S3
+B. Google Workspace
+C. RDS
+D. CloudWatch
+
+**答案：B**
+**解析：**IdP 负责企业统一账户登录。
+
+---
+
+### 8️⃣ 临时凭证通常与谁绑定？
+
+A. IAM User
+B. IAM Role
+C. IAM Policy
+D. KMS
+
+**答案：B**
+**解析：**角色 = 权限 + 临时凭证机制。
+
+---
+
+### 9️⃣ 在 VPC 中进行逻辑网络划分使用：
+
+A. Subnet
+B. AMI
+C. Lambda
+D. SNS
+
+**答案：A**
+**解析：**子网在 VPC 内进一步分区。
+
+---
+
+### 🔟 AWS STS 提供：
+
+A. 长期 Access Key
+B. Root 账号密码
+C. 临时安全凭证
+D. MFA 设备
+
+**答案：C**
+**解析：**临时 + 自动过期。
+
+---
+
+### 1️⃣1️⃣ 下列哪项是客户责任？
+
+A. 机房门禁
+B. 主机硬件维护
+C. 应用层数据加密
+D. 网络光纤铺设
+
+**答案：C**
+**解析：**客户负责自己放进去的数据与配置。
+
+---
+
+### 1️⃣2️⃣ 下列哪项**不属于** VPC 组成部分？
+
+A. 子网
+B. 路由表
+C. Internet Gateway
+D. IAM Policy
+
+**答案：D**
+**解析：**IAM Policy 属于身份系统，不是网络组件。
+
+---
+
+### 1️⃣3️⃣ 角色（IAM Role）主要用途：
+
+A. 创建用户
+B. 提供临时访问权限
+C. 购买 EC2
+D. 日志监控
+
+**答案：B**
+
+---
+
+### 1️⃣4️⃣ IAM Identity Center 可以对接：
+
+A. 只能 AWS 本地用户
+B. 只能移动应用
+C. 外部 IdP
+D. 不能对接任何外部系统
+
+**答案：C**
+**解析：**可接 Okta、Google、Azure AD 等。
+
+---
+
+### 1️⃣5️⃣ 判断题
+
+长期 Access Key 比临时凭证更安全。
+
+**答案：错误**
+**解析：**长期 key 风险更大不可控。
+
+---
+
+### 1️⃣6️⃣ 哪个可以在子网边界控制流量？
+
+A. NACL
+B. EC2
+C. S3
+D. EBS
+
+**答案：A**
+
+---
+
+### 1️⃣7️⃣ “Security **of** the cloud” 由谁负责？
+
+A. 客户
+B. AWS
+
+**答案：B**
+
+---
+
+### 1️⃣8️⃣ “Security **in** the cloud” 由谁负责？
+
+A. 客户
+B. AWS
+
+**答案：A**
+
+---
+
+### 1️⃣9️⃣ 哪个服务可以**单点登录多个 AWS 账户**？
+
+A. IAM Identity Center
+B. EC2
+C. Route 53
+D. ECR
+
+**答案：A**
+
+---
+
+### 2️⃣0️⃣ 哪个功能控制私网 + 公网出入口？
+
+A. NAT Gateway
+B. AMI
+C. SNS
+D. SQS
+
+**答案：A**
+**解析：**私有子网访问互联网用 NAT Gateway。
+
+---
+
+# 🎯 你要的重点总结
+
+* ✔ VPC = 私有网络
+* ✔ Subnet = 网络分区
+* ✔ STS = 临时凭证
+* ✔ Role = 授予临时权限
+* ✔ IdP = 认证（你是谁）
+* ✔ Identity Center = 授权（你能干嘛）
+* ✔ Shared model = 云上责任划分
+
+---
+
+## 👍 如果你愿意，我还能继续
+
+我可以继续为你生成：
+
+* 📌 50 题考试风格练习题
+* 🧭 超简版速背口诀
+* 🧠 思维导图高清图
+* 📝 PDF 版复习手册
+* 🎤 面试题回答模板
+
+```
+```
+Sure! Below are the **English versions**:
+
+* ✅ Original practice questions
+* ✅ Reference answers
+* ✅ Clear explanations
+* 🔒 Not tied to any protected assessments
+
+---
+
+# 🧭 Part 1 — 20 Concept Practice Questions (in English)
+
+---
+
+### 1️⃣ Which AWS service is used to create a private network?
+
+A. IAM
+B. VPC
+C. S3
+D. CloudFront
+
+**Answer:** B
+**Explanation:** VPC (Virtual Private Cloud) lets you build an isolated network in AWS.
+
+---
+
+### 2️⃣ Which service issues temporary security credentials that expire automatically?
 
 A. IAM user
 B. Access keys
 C. AWS STS
 D. Security Groups
 
----
-
-### 3️⃣ Which best describes an Identity Provider (IdP)?
-
-A. A database service
-B. A service that stores EC2 AMIs
-C. A service that verifies user identity
-D. A logging service
+**Answer:** C
+**Explanation:** AWS STS = Security Token Service → generates temporary credentials.
 
 ---
 
-### 4️⃣ IAM Identity Center is mainly used for:
+### 3️⃣ What does an Identity Provider (IdP) do?
 
-A. Billing alerts
-B. Multi-region networking
-C. Centralized access & permissions management
-D. Encrypting S3 objects
+A. Stores EC2 images
+B. Authenticates users (login identity)
+C. Distributes network traffic
+D. Encrypts database data
+
+**Answer:** B
+**Explanation:** IdP verifies **who you are**.
+
+---
+
+### 4️⃣ What is AWS IAM Identity Center primarily used for?
+
+A. Billing management
+B. UI customization
+C. Centralized access and permissions management
+D. Object storage
+
+**Answer:** C
 
 ---
 
 ### 5️⃣ True or False
 
-AWS manages physical data centers under the shared responsibility model.
+AWS is responsible for the physical security of data centers.
+
+**Answer:** True
+**Explanation:** That is **security of the cloud**.
 
 ---
 
 ### 6️⃣ True or False
 
-Customers are responsible for configuring Security Groups.
+Configuring Security Groups is the responsibility of the customer.
+
+**Answer:** True
+**Explanation:** That is **security in the cloud**.
 
 ---
 
-### 7️⃣ Which is an example of an IdP?
+### 7️⃣ Which of the following is an example of an IdP?
 
 A. S3
 B. Google Workspace
-C. Route 53
-D. CloudTrail
+C. Amazon RDS
+D. CloudWatch
+
+**Answer:** B
 
 ---
 
-### 8️⃣ Temporary credentials usually belong to:
+### 8️⃣ Temporary security credentials are typically associated with:
 
 A. IAM users
 B. IAM roles
-C. Security Groups
-D. Elastic IPs
+C. IAM policies
+D. KMS keys
+
+**Answer:** B
+**Explanation:** Roles grant temporary permissions.
 
 ---
 
-### 9️⃣ Which AWS service creates **logical network segmentation** inside a VPC?
+### 9️⃣ Which resource is used for logical network segmentation inside a VPC?
 
 A. Subnet
 B. AMI
-C. SNS
-D. Lambda
+C. Lambda
+D. SNS
+
+**Answer:** A
 
 ---
 
 ### 🔟 What does AWS STS provide?
 
-A. Permanent access keys
-B. Database credentials
+A. Long-term access keys
+B. Root user credentials
 C. Short-term security credentials
-D. EC2 passwords
+D. EC2 SSH keys
+
+**Answer:** C
 
 ---
 
-### 1️⃣1️⃣ Which side is customer responsibility?
+### 1️⃣1️⃣ Which of the following is the customer’s responsibility?
 
-A. Hypervisor patching
-B. Physical security doors
-C. Encrypting application data
-D. Fiber network installation
+A. Data center access control
+B. Hardware maintenance
+C. Application data encryption
+D. Laying fiber cables
 
----
-
-### 1️⃣2️⃣ Which is **NOT** part of VPC networking?
-
-A. Route tables
-B. Internet Gateway
-C. Subnets
-D. IAM policies
+**Answer:** C
 
 ---
 
-### 1️⃣3️⃣ A role is primarily used to:
+### 1️⃣2️⃣ Which of the following is **NOT** a component of a VPC?
 
-A. Create users
-B. Provide temporary permissions
-C. Buy EC2 capacity
+A. Subnet
+B. Route table
+C. Internet Gateway
+D. IAM policy
+
+**Answer:** D
+**Explanation:** IAM policy belongs to identity and access, not networking.
+
+---
+
+### 1️⃣3️⃣ What is the primary purpose of an IAM role?
+
+A. Create user accounts
+B. Provide temporary access permissions
+C. Purchase EC2 instances
 D. Monitor logs
+
+**Answer:** B
 
 ---
 
 ### 1️⃣4️⃣ IAM Identity Center can integrate with:
 
-A. Only AWS accounts
-B. Only mobile apps
-C. External IdPs
-D. None
+A. Only AWS local users
+B. Only mobile applications
+C. External identity providers
+D. No external systems
+
+**Answer:** C
 
 ---
 
@@ -132,170 +430,78 @@ D. None
 
 Long-term access keys are safer than temporary credentials.
 
----
-
-### 1️⃣6️⃣ Which resource isolates workloads at subnet level?
-
-A. NACL
-B. VPC
-C. EBS
-D. IAM Group
+**Answer:** False
 
 ---
 
-### 1️⃣7️⃣ Which best completes the sentence?
+### 1️⃣6️⃣ Which resource can control traffic at the subnet boundary?
 
-“Security **of** the cloud is handled by ______.”
+A. Network ACL (NACL)
+B. EC2
+C. S3
+D. EBS
+
+**Answer:** A
+
+---
+
+### 1️⃣7️⃣ “Security **of** the cloud” is the responsibility of:
+
 A. The customer
 B. AWS
 
+**Answer:** B
+
 ---
 
-### 1️⃣8️⃣ Which best completes the sentence?
+### 1️⃣8️⃣ “Security **in** the cloud” is the responsibility of:
 
-“Security **in** the cloud is handled by ______.”
 A. The customer
 B. AWS
 
+**Answer:** A
+
 ---
 
-### 1️⃣9️⃣ Which service helps **single sign-on into multiple AWS accounts**?
+### 1️⃣9️⃣ Which AWS service supports single sign-on to multiple AWS accounts?
 
 A. IAM Identity Center
 B. EC2
 C. CloudFormation
-D. ECR
+D. Amazon ECR
+
+**Answer:** A
 
 ---
 
-### 2️⃣0️⃣ Which feature can restrict inbound/outbound traffic at subnet border?
+### 2️⃣0️⃣ Which service enables private subnets to access the internet?
 
-A. IAM policy
-B. NACL
-C. EBS volume
-D. S3 bucket policy
+A. NAT Gateway
+B. AMI
+C. SNS
+D. EBS
 
----
-
-## 🧩 Answer Key (self-check)
-
-1B  2C  3C  4C  5T
-6T  7B  8B  9A  10C
-11C 12D 13B 14C 15F
-16A 17B 18A 19A 20B
+**Answer:** A
 
 ---
 
-# 🧪 Part 2 — Mock-Exam-Style Simulation Questions
+# 🎯 Key Takeaways (English)
 
-These mimic exam *tone*, but are **fully original questions**.
-
----
-
-### 🧭 Scenario 1
-
-A company wants employees to log into AWS using their **corporate Google accounts**, without creating IAM users.
-
-Which combination fits?
-
-* Identity is verified by: ______
-* Permissions are granted by: ______
-
-Options:
-A. IdP verifies identity; IAM Identity Center grants permissions
-B. IAM grants identity; VPC grants permissions
-C. STS verifies identity; EC2 grants permissions
-D. S3 verifies identity; IAM grants permissions
+* VPC = private network
+* Subnet = network segment
+* STS = issues temporary credentials
+* IAM Role = grants temporary permissions
+* IdP = authentication (who you are)
+* IAM Identity Center = authorization (what you can do)
+* AWS vs Customer responsibilities = shared responsibility model
 
 ---
 
-### 🧭 Scenario 2
+## If you’d like next:
 
-An application running on EC2 needs **temporary access** to S3 without storing keys.
-
-What should be used?
-
-A. IAM role
-B. IAM group
-C. Root user
-D. EC2 key pair
-
----
-
-### 🧭 Scenario 3
-
-A company wants to isolate workloads by IP range, subnets, routing rules, and gateways.
-
-Which AWS service should they design first?
-
-A. IAM
-B. Route 53
-C. VPC
-D. CloudTrail
-
----
-
-### 🧠 Scenario Answers
-
-1A
-2A
-3C
-
----
-
-# 🧭 Part 3 — Text-based Mind Map (ASCII)
-
+✅ 50 English practice questions
+✅ exam-style scenarios with diagrams
+✅ interview answers
+✅ flashcards
+✅ PDF study sheet
 ```
-AWS Core Concepts
-|
-+-- Shared Responsibility Model
-|     |-- AWS: security OF the cloud
-|     |     |-- data centers
-|     |     |-- hardware
-|     |     |-- virtualization
-|     |
-|     |-- Customer: security IN the cloud
-|           |-- data encryption
-|           |-- IAM configuration
-|           |-- network rules
-|
-+-- Identity & Access
-|     |
-|     +-- Identity Provider (IdP)
-|     |     |-- Google / Okta / Azure AD
-|     |     |-- Authentication (who you are)
-|     |
-|     +-- IAM Identity Center
-|           |-- Authorization (what you can do)
-|           |-- SSO for AWS accounts/apps
-|
-+-- Credentials
-|     |
-|     +-- Temporary Credentials
-|           |-- AWS STS
-|           |-- IAM Role
-|           |-- expire automatically
-|
-+-- Networking
-      |
-      +-- VPC
-      |     |-- subnets
-      |     |-- route tables
-      |     |-- gateways
-      |
-      +-- Security Tools
-            |-- Security Groups
-            |-- NACLs
-```
-
----
-
-## 🎯 Want next steps?
-
-I can also generate:
-
-🔹 flashcards
-🔹 30-question full practice test
-🔹 real-world architecture scenarios
-🔹 interview-style Q&A
-🔹 simplified Chinese/English bilingual notes
