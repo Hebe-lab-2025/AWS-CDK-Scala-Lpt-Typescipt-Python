@@ -1,1 +1,1 @@
-！[](../images/DecoupledArchitecture.png)
+![](../images/DecoupledArchitecture.png)
