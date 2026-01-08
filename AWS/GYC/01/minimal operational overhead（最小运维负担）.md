@@ -31,8 +31,10 @@ minimal operational overhead（最小运维负担）
 ```
 错误联想（扣分）
 
-❌ EC2 + 自己装数据库
-❌ 自己 patch OS
-❌ 自己管 scaling / backup
+- ❌ EC2 + 自己装数据库
 
-📌 一看到这个词，EC2 基本就该被排除了
+- ❌ 自己 patch OS
+
+- ❌ 自己管 scaling / backup
+
+- 📌 一看到这个词，EC2 基本就该被排除了
