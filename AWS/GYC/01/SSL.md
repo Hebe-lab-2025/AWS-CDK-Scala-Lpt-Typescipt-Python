@@ -153,3 +153,31 @@ EC2 / ECS（HTTP）
 * 🔹 **对比 SSL at ALB vs SSL at EC2**
 
 你想继续 **安全** 还是 **负载均衡**？
+
+
+**SSL = Secure Sockets Layer** 的中文翻译是：
+
+> **SSL = 安全套接字层**
+
+### 拆词直译（方便记忆）
+
+* **Secure**：安全的
+* **Sockets**：套接字（网络通信接口）
+* **Layer**：层
+
+👉 合起来就是：**用于保护网络套接字通信的一层安全机制**
+
+### 更通俗的中文解释（考试 / 口语用）
+
+> **SSL 是一种用于加密网络通信、保证数据安全传输的协议层。**
+
+### 考试里你也可以这样说（中英对照）
+
+* **SSL（安全套接字层）用于在客户端和服务器之间建立加密连接。**
+* **SSL is used to secure data transmission between clients and servers.**
+
+如果你愿意，我可以帮你整理一张 **「SSL / TLS / HTTPS 中文对照速记表」**，特别适合考前 5 分钟复习。
+
+
+
+
