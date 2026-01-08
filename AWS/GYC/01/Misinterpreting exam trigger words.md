@@ -1,4 +1,4 @@
-```md
+
 # Trap 4: Misinterpreting Exam Trigger Words
 
 👉 **trap 的意思是：考试里的“陷阱 / 坑”**
@@ -82,6 +82,6 @@
 - 🔹 AWS 考试 **Top 10 Traps 清单**
 - 🔹 **Trap × Trigger Words** 对照速查表
 - 🔹 “**故意挖坑**”的模拟题训练直觉
-```
+
 
 如果你要 **GitHub 速记卡 / Notion 模板 / 考前一页纸** 版本，我可以直接帮你拆好。
