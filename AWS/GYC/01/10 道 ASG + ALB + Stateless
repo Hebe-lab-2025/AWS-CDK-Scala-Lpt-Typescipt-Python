@@ -1,0 +1,263 @@
+太好了，这一组是 **SAA-C03「计算 + 架构」的压轴核心**。
+我直接给你 **考试可用成品**：**陷阱题 → 扩缩容实战 → Stateless 串图 → 一句话背三层**。
+
+---
+
+# 🔥 一、10 道 **ASG + ALB + Stateless** 混合陷阱题（秒杀型）
+
+> 规则：**抓关键词，不画架构**
+
+---
+
+### Q1
+
+**Web tier must scale automatically and be highly available**
+✅ **ALB + ASG**
+❌ 单 EC2
+🔑 scalable + HA
+
+---
+
+### Q2
+
+**Application instances should not store user sessions locally**
+✅ **Stateless design**
+❌ Sticky Session
+🔑 session 不能在实例里
+
+---
+
+### Q3
+
+**Traffic spikes cause slow response, but instances scale correctly**
+✅ **Cache in front of DB**
+❌ 再加 ASG
+🔑 scale ≠ latency
+
+---
+
+### Q4
+
+**One instance fails, users should not notice**
+✅ **ALB health check + ASG**
+❌ Multi-AZ DB
+🔑 web 层 HA
+
+---
+
+### Q5
+
+**New instances must immediately serve authenticated users**
+✅ **JWT / External session store**
+❌ 本地 session
+🔑 即刻可用
+
+---
+
+### Q6
+
+**Backend processing should not block web requests**
+✅ **SQS + Worker ASG**
+❌ Web 直接处理
+🔑 decouple
+
+---
+
+### Q7
+
+**Need to route traffic only to healthy instances**
+✅ **ALB target group health checks**
+❌ DNS 轮询
+🔑 L7 健康检查
+
+---
+
+### Q8
+
+**Application must handle sudden burst traffic with minimal ops**
+✅ **ALB + ASG + Stateless**
+❌ 预置大实例
+🔑 unpredictable
+
+---
+
+### Q9
+
+**User login state lost after scale-out**
+✅ **Stateless + JWT / Redis**
+❌ Sticky session
+🔑 scale-out 暗号
+
+---
+
+### Q10（反直觉）
+
+**Scale out works, but DB CPU hits 100%**
+✅ **Cache / Read Replica**
+❌ 再加 ASG
+🔑 DB 瓶颈 ≠ 计算层
+
+---
+
+## 🧠 一句话防错
+
+```
+ASG 解决容量
+ALB 解决入口
+Stateless 解决“扩容后还能用”
+```
+
+---
+
+# 🧪 二、**ASG 扩缩容全过程** 场景模拟（考试必会）
+
+## 🎯 场景：流量从 1k → 50k QPS
+
+```text
+[Users]
+   |
+  ALB
+   |
+Target Group
+   |
+EC2 (ASG)
+```
+
+### ⬆️ Scale-Out（扩容）
+
+1. ALB 请求变多
+2. CloudWatch 指标（CPU / RequestCount）超阈值
+3. ASG **launch 新实例**
+4. 实例通过 **ALB health check**
+5. 自动加入 Target Group
+6. **无感承载新流量**
+
+🔑 前提：**Stateless**
+
+---
+
+### ⬇️ Scale-In（缩容）
+
+1. 流量下降
+2. ASG 选择实例终止
+3. ALB **drain connections**
+4. 请求完成后下线
+5. 实例终止
+
+🔑 前提：**无本地状态**
+
+---
+
+## ❌ 为什么有状态会炸？
+
+```
+Session 在 EC2 内存
+→ 新实例无状态
+→ 用户被踢
+```
+
+---
+
+# 🧠 三、**Stateless + Cache + JWT** 速记图（必背）
+
+```text
+Client
+  |
+  |  JWT (token)
+  v
+ ALB
+  |
+  v
+ Stateless App (ASG)
+  |
+  | ① 验证 JWT（不存状态）
+  |
+  | ② 查 Cache（Redis）
+  v
+ Cache (ElastiCache)
+  |
+  | miss
+  v
+ Database (RDS/Aurora)
+```
+
+### 三个核心点
+
+1. **JWT**：身份在客户端
+2. **Cache**：性能在内存
+3. **App**：只做计算 → 可随意扩缩
+
+---
+
+## 🚫 考试高频误区
+
+```
+❌ Sticky Session = Stateless
+❌ ASG = 自动解决一切
+❌ Scale-out = 性能问题
+```
+
+---
+
+# 🎯 四、**一句话 = 一个架构点**（三层架构背诵版）
+
+> **你在考场只需要念这些句子**
+
+---
+
+### 🌐 Web 层
+
+> **Stateless web tier behind ALB allows Auto Scaling without user impact.**
+
+---
+
+### ⚙️ App / Compute 层
+
+> **ASG automatically adds or removes instances based on demand.**
+
+---
+
+### 💾 Data 层
+
+> **Cache offloads read traffic and reduces database latency.**
+
+---
+
+### 🔐 认证
+
+> **JWT enables stateless authentication across scaled instances.**
+
+---
+
+### 🔁 解耦
+
+> **SQS decouples web requests from background processing.**
+
+---
+
+### 🛡️ 高可用
+
+> **Multi-AZ ensures availability, not performance.**
+
+---
+
+## 🧠 终极三行背诵（闭眼版）
+
+```
+ALB 接流量
+ASG 扛变化
+Stateless 保扩容不翻车
+```
+
+---
+
+## 下一步我可以继续帮你（强烈建议）👇
+
+* 🔥 **再来 10 道「Stateless vs Sticky Session」地狱题**
+* 🧪 **ALB + ASG + Cache + DB 四选一混合卷**
+* 📄 **生成一页 PDF：Stateless + Scaling 终极速记**
+* 🎯 **全真模拟：连续 25 题 3 秒/题**
+
+你回我 **A / B / C / D**，我立刻继续。
+
+
