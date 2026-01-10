@@ -12,7 +12,7 @@
 
 > **字段顺序**：`Front,Back`
 
-```csv
+
 "**HTTPS** + **path-based routing**","**ALB**｜**Layer 7** + path/host routing"
 "**Ultra low latency** + **static IP**","**NLB**｜**L4** + static IP"
 "**WebSocket** support required","**ALB**｜supports WebSocket"
