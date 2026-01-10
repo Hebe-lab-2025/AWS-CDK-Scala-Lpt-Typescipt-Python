@@ -8,41 +8,83 @@
 
 > **用法重点**：**不看解析｜3 秒内选｜建立条件反射**
 
-## 📥 Anki 导入格式（CSV）
+下面我把你给的**所有暗号 → 秒选答案**，整理成一张**考试级 Markdown 决策速查表**，**一行=一个条件反射**，直接背就行（适合做锁屏 / Anki / PDF）。
 
-> **字段顺序**：`Front,Back`
+---
 
+# 🔥 AWS ALB vs NLB【暗号 → 秒选表】
 
-"**HTTPS** + **path-based routing**","**ALB**｜**Layer 7** + path/host routing"
-"**Ultra low latency** + **static IP**","**NLB**｜**L4** + static IP"
-"**WebSocket** support required","**ALB**｜supports WebSocket"
-"**Preserve client IP**","**NLB**｜source IP preserved"
-"**HTTP header inspection**","**ALB**｜can inspect headers"
-"**Millions of requests per second**","**NLB**｜designed for **extreme scale**"
-"**TLS termination** at load balancer","**ALB**｜**TLS offloading**"
-"**TCP traffic only**","**NLB**｜**Layer 4**"
-"**gRPC traffic**","**ALB**｜**HTTP/2 + gRPC**"
-"**Cost-sensitive** + HTTP app","**ALB**｜cheaper than NLB"
-"**UDP traffic**","**NLB**｜supports UDP"
-"Need **WAF integration**","**ALB**｜**WAF only works with ALB**"
-"**Lambda** as backend","**ALB**｜Lambda target supported"
-"**Fixed IP** required","**NLB**｜**static IP per AZ**"
-"**Host-based routing**","**ALB**｜host-based routing"
-"**High throughput** + **low latency**","**NLB**｜optimized for performance"
-"**HTTP redirects**","**ALB**｜supports redirects"
-"**TLS pass-through**","**NLB**｜no TLS termination"
-"Need **Layer 7 metrics**","**ALB**｜request-level metrics"
-"**Legacy TCP app**","**NLB**｜best for TCP"
-"Need **sticky sessions**","**ALB**｜supports stickiness"
-"**Private IP** load balancing","**NLB**｜internal NLB"
-"**HTTP/2** required","**ALB**｜supports HTTP/2"
-"**Extreme performance spikes**","**NLB**｜handles sudden spikes"
-"**Microservices routing**","**ALB**｜path-based routing"
-"**Lowest latency possible**","**NLB**｜lower latency than ALB"
-"**Application-level auth**","**ALB**｜**OIDC integration**"
-"Need **access logs per request**","**ALB**｜detailed access logs"
-"**Non-HTTP protocol**","**NLB**｜not HTTP-based"
-"**Cost optimization** for web app","**ALB**｜default choice"
+> **规则一句话**
+> 👉 **HTTP / L7 / 路由 / 功能 → ALB**
+> 👉 **极低延迟 / TCP-UDP / 静态 IP / 性能 → NLB**
+
+---
+
+## 🧠 一眼秒选对照表
+
+| 题干暗号 / 需求                       | 秒选                            |
+| ------------------------------- | ----------------------------- |
+| HTTPS + path-based routing      | **ALB**｜Layer 7 + 路径/主机路由     |
+| Host-based routing              | **ALB**｜host routing          |
+| Microservices routing           | **ALB**｜path-based routing    |
+| HTTP header inspection          | **ALB**｜可检查 header            |
+| HTTP redirects                  | **ALB**｜支持重定向                 |
+| Need Layer 7 metrics            | **ALB**｜request-level metrics |
+| Need access logs per request    | **ALB**｜详细访问日志                |
+| Application-level auth          | **ALB**｜OIDC 集成               |
+| Need sticky sessions            | **ALB**｜支持会话保持                |
+| WebSocket support required      | **ALB**｜支持 WebSocket          |
+| gRPC traffic                    | **ALB**｜HTTP/2 + gRPC         |
+| HTTP/2 required                 | **ALB**｜支持 HTTP/2             |
+| Lambda as backend               | **ALB**｜支持 Lambda target      |
+| Need WAF integration            | **ALB**｜WAF 只能挂 ALB           |
+| TLS termination at LB           | **ALB**｜TLS offloading        |
+| Cost-sensitive + HTTP app       | **ALB**｜更便宜                   |
+| Cost optimization for web app   | **ALB**｜默认选择                  |
+| ---                             | ---                           |
+| Ultra low latency               | **NLB**｜更低延迟                  |
+| Lowest latency possible         | **NLB**｜比 ALB 低               |
+| High throughput + low latency   | **NLB**｜性能优化                  |
+| Extreme performance spikes      | **NLB**｜抗突发                   |
+| Millions of requests per second | **NLB**｜极限规模                  |
+| Fixed IP required               | **NLB**｜每 AZ 静态 IP            |
+| Preserve client IP              | **NLB**｜保留源 IP                |
+| TCP traffic only                | **NLB**｜Layer 4               |
+| UDP traffic                     | **NLB**｜支持 UDP                |
+| Non-HTTP protocol               | **NLB**｜非 HTTP                |
+| Legacy TCP app                  | **NLB**｜最适合                   |
+| TLS pass-through                | **NLB**｜不终止 TLS               |
+| Private IP load balancing       | **NLB**｜Internal NLB          |
+| TCP-only / L4 only              | **NLB**｜不看 HTTP               |
+
+---
+
+## 🧨 考试「秒杀口诀」
+
+* **看到 HTTP / 路由 / Header / WAF / Lambda → 直接 ALB**
+* **看到 TCP / UDP / 静态 IP / 极低延迟 → 直接 NLB**
+* **不写协议 + Web App → 默认 ALB**
+* **写“lowest latency / extreme scale” → 一定 NLB**
+
+---
+
+## 🧪 最容易被坑的混淆点（必记）
+
+* ❌ **“高性能 Web” ≠ NLB**（只要是 HTTP，大多数还是 **ALB**）
+* ❌ **“HTTPS” ≠ NLB**（TLS 终止 = ALB）
+* ❌ **“私网” ≠ ALB**（Internal NLB 很常见）
+* ✅ **是否需要 L7 能力** 是唯一分水岭
+
+---
+
+如果你愿意，我可以下一步直接帮你做👇
+
+* 📄 **一页 PDF 锁屏版（只留暗号）**
+* 🧠 **Anki 条件反射卡（看到词 0.5 秒选）**
+* 🧪 **20 道“ALB vs NLB 地狱盲选题”**（专防手滑）
+
+你选一个，或者直接说 **ALL IN**。
+
 
 
 📌 **导入方式重点**
