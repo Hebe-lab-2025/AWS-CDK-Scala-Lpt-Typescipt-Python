@@ -1,4 +1,4 @@
-````markdown
+
 好，**这三件我按「直接可用」给你一次性交付内容**。  
 你现在就能 **复制 → 导入 → 打印 → 开刷**。
 
@@ -43,7 +43,7 @@
 "Need **access logs per request**","**ALB**｜detailed access logs"
 "**Non-HTTP protocol**","**NLB**｜not HTTP-based"
 "**Cost optimization** for web app","**ALB**｜default choice"
-````
+
 
 📌 **导入方式重点**
 
